@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmployeeDAO">
+
+    <!-- ResultMap 선언 -->
+    <resultMap type="employee" id="employeeResult">
+        <result property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="startDate" column="START_DATE"/>
+        <result property="title" column="TITLE"/>
+        <result property="deptName" column="DEPT_NAME"/>
+        <result property="salary" column="SALARY"/>
+    </resultMap>
+ 
+    <!-- 직원 등록 sql -->
+    <insert id="insertEmployee" parameterType="employee">
+        INSERT INTO s_emp(id, name, start_date, title, dept_name, salary)
+        VALUES( ( SELECT nvl(max(id), 0) + 1 FROM s_emp ), 
+                #{name}, 
+                #{startDate}, 
+                #{title}, 
+                #{deptName}, 
+                #{salary} )
+    </insert>   
+    
+    <!-- 직원 목록 검색 sql -->
+    <select id="getEmployeeList" resultMap="employeeResult">
+        SELECT * 
+        FROM s_emp 
+        ORDER BY name
+    </select>    
+</mapper>
