@@ -109,7 +109,7 @@ public class JPQLJoinTest {
 				// inner join
 				System.out.println(employee.getName() + "의 부서 " + department.getName());
 			} else {
-				System.out.println(employee.getName() + "는 대기중.....");;
+				System.out.println(employee.getName() + "는 대기중.....");
 			}
 		}
 		
@@ -142,7 +142,9 @@ public class JPQLJoinTest {
 	
 	/* 조인 페치 
 	 * 	- 처음부터 조인 쿼리 이용, 연관관계에 있는 객체 get 
-	 * 	- Default : INNER JOIN 으로 결과 get */
+	 * 	- Default : INNER JOIN 으로 결과 get 
+	 *  - Employee 객체로 다 받아옴. -> TypedQuery<Employee> 로 해도 문제 X 
+	 * */
 	private void dataSelectWithJoinFetch(EntityManagerFactory emf) {
 		EntityManager em = emf.createEntityManager();
 		

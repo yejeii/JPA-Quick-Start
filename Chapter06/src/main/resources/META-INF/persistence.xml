@@ -6,6 +6,9 @@
     
     <!-- 영속성 유닛 설정 -->
     <persistence-unit name="Chapter06">
+
+        <!-- Named Query XML 등록 -->
+        <mapping-file>jpql/EntityMap_employee.xml</mapping-file>
         
         <!-- Entity 클래스 등록  -->
         <class>com.rupypaper.biz.domain.Employee</class>
