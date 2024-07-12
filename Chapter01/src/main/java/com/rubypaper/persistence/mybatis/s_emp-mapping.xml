@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- DAO(Data Access Object)
+    
+    EmployeeDAO : 사원 정보(Employee)를 접속할 수 있는 객체 
+-->
 <mapper namespace="EmployeeDAO">
 
-    <!-- ResultMap 선언 -->
+    <!-- ResultMap 선언 
+        type="employee" : sql-map-config.xml 에서 설정한 <typeAlias alias="employee"> 
+        id="employeeResult" : 해당 namespace 안에서 사용할 id  -->
     <resultMap type="employee" id="employeeResult">
         <result property="id" column="ID"/>
         <result property="name" column="NAME"/>

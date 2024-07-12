@@ -27,6 +27,10 @@ public class EmployeeDAO {
 	
 	public void insertEmployee(EmployeeVO vo) {
 		System.out.println("===> MyBatis 기반으로 회원 등록 기능");
+		
+		// EmployeeDAO : s_emp-mapping.xml 의 namespace
+		// insertEmployee : EmployeeDAO 의 insert tag 의 id
+		// vo : parameterType="employee" 와 매핑됨 
 		mybatis.insert("EmployeeDAO.insertEmployee", vo);
 		mybatis.commit();
 	}

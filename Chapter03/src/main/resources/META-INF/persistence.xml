@@ -8,7 +8,7 @@
     <persistence-unit name="Chapter03">
         
         <!-- Entity 클래스 등록  -->
-        <class>com.rupypaper.biz.domain.Employee</class>
+        <class>com.rubypaper.biz.domain.Employee</class>
         
         <!-- JPA 프로퍼티 설정 -->
         <properties>

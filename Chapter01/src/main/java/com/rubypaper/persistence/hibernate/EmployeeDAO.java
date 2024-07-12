@@ -7,8 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.rubypaper.persistence.hibernate.EmployeeVO;
-
 public class EmployeeDAO {
 	
 	private SessionFactory sessionFactory;
@@ -26,6 +24,8 @@ public class EmployeeDAO {
 		System.out.println("===> Hibernate 기반으로 직원 등록 기능 처리");
 		try {
 			transaction.begin();
+
+			// 관리상태
 			session.persist(vo);
 			transaction.commit();
 		} catch (Exception e) {

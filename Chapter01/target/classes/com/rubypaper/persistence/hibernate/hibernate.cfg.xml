@@ -6,6 +6,9 @@
 <hibernate-configuration>
 
     <session-factory>
+
+        <!-- Entity 클래스 등록 -->
+        <mapping class="com.rubypaper.persistence.hibernate.EmployeeVO" />
         
         <!-- DataSource 설정 -->
         <property name="hibernate.connection.driver_class">org.h2.Driver</property>
@@ -15,12 +18,13 @@
         <property name="hibernate.connection.pool_size">1</property>
         
         <!-- Hibernate 프로퍼티 설정 -->
+        <!-- Hibernate 가 다양한 DB 를 사용함에 있어 차이나는 SQL 에 대해 작성시 참고하는 정보 -->
         <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+        <!-- S_EMP테이블의 존재유무를 확인한 후, 없으면 생성, 있으면 계속 사용 -->
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <!-- Hibernate 에서 생성된 SQL문 로그 출력 유무 설정 -->
         <property name="hibernate.show_sql">true</property>
         
-        <!-- Entity 클래스 등록 -->
-        <mapping class="com.rubypaper.persistence.hibernate.EmployeeVO" />
     </session-factory>
   
 </hibernate-configuration>
