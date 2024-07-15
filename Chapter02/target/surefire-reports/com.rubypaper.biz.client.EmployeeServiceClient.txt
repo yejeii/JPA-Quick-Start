@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: com.rubypaper.biz.client.EmployeeServiceClient
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.939 s <<< FAILURE! - in com.rubypaper.biz.client.EmployeeServiceClient
+run(com.rubypaper.biz.client.EmployeeServiceClient)  Time elapsed: 1.916 s  <<< ERROR!
+org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at com.rubypaper.biz.client.EmployeeServiceClient.run(EmployeeServiceClient.java:30)
+Caused by: org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at com.rubypaper.biz.client.EmployeeServiceClient.run(EmployeeServiceClient.java:30)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: Connection is broken: "java.net.ConnectException: Connection refused: no further information: localhost" [90067-199]
+	at com.rubypaper.biz.client.EmployeeServiceClient.run(EmployeeServiceClient.java:30)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at com.rubypaper.biz.client.EmployeeServiceClient.run(EmployeeServiceClient.java:30)
+

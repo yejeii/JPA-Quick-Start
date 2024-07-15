@@ -7,16 +7,24 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.rubypaper.biz.domain.Employee;
+import org.junit.Test;
+
+import com.rubypaper.biz.domain.Employee10;
 import com.rubypaper.biz.domain.EmployeeId;
+
 
 public class EmployeeServiceClient {
 
-	public static void main(String[] args) {
+	@Test
+	public void run() {
 
-		// Chapter02 에 대한 엔티티 매니저 팩토리 생성
+		// <persistence-unit name="Chapter02" /> 의 설정 정보 참조
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter02");
-		
+		// nonTransactionInsert(emf);
+	}
+
+	public void withTransactionInsert(EntityManagerFactory emf) {
+
 		// 엔티티 매니저 생성
 		EntityManager em = emf.createEntityManager();
 		
@@ -30,7 +38,7 @@ public class EmployeeServiceClient {
 			// 직원 엔티티 생성 및 초기화 - 비영속 상태
 			EmployeeId empId = new EmployeeId(2L, "guest456");
 			
-			Employee employee = new Employee();
+			Employee10 employee = new Employee10();
 			employee.setEmpId(empId);
 //			employee.setId(1L);
 			employee.setName("둘리");
@@ -51,7 +59,7 @@ public class EmployeeServiceClient {
 			tx.commit();	
 			
 			// 등록한 회원 검색
-			Employee findEmployee = em.find(Employee.class, empId);
+			Employee10 findEmployee = em.find(Employee10.class, empId);
 			System.out.println("검색한 회원 정보");
 			System.out.println(findEmployee.toString());
 		} catch (Exception e) {
@@ -65,5 +73,4 @@ public class EmployeeServiceClient {
 			emf.close();
 		}
 	}
-
 }

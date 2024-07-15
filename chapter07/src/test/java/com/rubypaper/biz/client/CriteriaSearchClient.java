@@ -23,7 +23,8 @@ public class CriteriaSearchClient {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter07");
 		try {
 			dataInsert(emf);
-			dataSelect(emf);
+			// dataSelect(emf);
+			dataSelectUseCriteriaReturnObject(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -145,6 +146,14 @@ public class CriteriaSearchClient {
 	 * 검색 결과가 엔티티가 아닌 여러 변수로 구성된 경우엔 리턴 타입을 Object[] 사용
 	 * 
 	 * Criteria 를 이용하여 직원의 아이디, 이름, 급여 정보만 선택적으로 조회
+	 * 
+	 * Hibernate >>
+	 * 	select
+	 * 		employee0_.id as col_0_0_,,
+	 * 		employee0_.name as col_1_0_,
+	 * 		employee0_.salary as col_2_0_ 
+	 * 	from
+	 * 		S_EMP employee0_
 	 */
 	private static void dataSelectUseCriteriaReturnObject(EntityManagerFactory emf) {
 		EntityManager em = emf.createEntityManager();
