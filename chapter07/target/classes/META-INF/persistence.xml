@@ -9,6 +9,7 @@
 
         <!-- Entity 클래스 등록  -->
         <class>com.rubypaper.biz.domain.Employee</class>
+        <class>com.rubypaper.biz.domain.Department</class>
         
         <!-- JPA 프로퍼티 설정 -->
         <properties>
