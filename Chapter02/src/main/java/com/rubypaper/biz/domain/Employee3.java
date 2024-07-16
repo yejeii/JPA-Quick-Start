@@ -33,14 +33,14 @@ import lombok.Data;
 @Table(name="Employee3", uniqueConstraints={@UniqueConstraint(columnNames={"NAME", "MAILID"})})
 public class Employee3 {
 	
-	@Id// S_EMP 테이블의 PK 와 매핑
+	@Id	// S_EMP 테이블의 PK 와 매핑
 	private Long id;
 	
 	private String name;
 	
 	private String mailId;
 	
-	@Column(name="START_DATE")// 멤버명과 S_EMP 테이블의 칼럼명이 차이
+	@Column(name="START_DATE")	// 멤버명과 S_EMP 테이블의 칼럼명이 차이
 								// 매핑될 칼럼명을 명시적으로 매핑
 	private Date startDate;
 	
