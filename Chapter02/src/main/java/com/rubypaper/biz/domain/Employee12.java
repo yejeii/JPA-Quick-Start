@@ -1,6 +1,5 @@
 package com.rubypaper.biz.domain;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -33,7 +32,7 @@ import lombok.Data;
  * Employee12ServiceTest
  */
 @Data
-@Entity
+// @Entity
 @Table(name="Employee12")
 public class Employee12 {
 

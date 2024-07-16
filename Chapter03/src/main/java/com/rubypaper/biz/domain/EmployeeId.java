@@ -22,7 +22,7 @@ import lombok.ToString;
  * 
  * @author ga29_
  */
-//@Embeddable
+@Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

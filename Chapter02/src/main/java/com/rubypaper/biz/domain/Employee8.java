@@ -27,7 +27,7 @@ import lombok.ToString;
 @ToString
 public class Employee8 {
 	
-	@Id// S_EMP 테이블의 PK 와 매핑
+	@Id	// Employee8 테이블의 PK 와 매핑
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
