@@ -14,15 +14,12 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 
 @Data
-// @ToString(exclude = {"searchCondition", "searchKeyword"})
-// @DynamicUpdate
 @Entity
 @Table(name = "S_EMP")
-// @Access(AccessType.FIELD)
-public class Employee {
+public class Employee2 {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length = 7, nullable = false)
 	private Long id;
 	
@@ -45,5 +42,4 @@ public class Employee {
 	@Column(name = "COMMISSION_PCT", precision = 4, scale = 2, 
 			columnDefinition = "double CHECK(commission_pct IN(10, 12.5, 15, 17.5, 20))")
 	private Double commissionPct;
-	
 }
