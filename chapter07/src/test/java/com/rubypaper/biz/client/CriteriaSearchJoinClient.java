@@ -19,7 +19,7 @@ import org.junit.Test;
 import com.rubypaper.biz.domain.Department;
 import com.rubypaper.biz.domain.Employee;
 
-public class CriteriaJoinSearchClient {
+public class CriteriaSearchJoinClient {
 
     @Test
     public void run() {

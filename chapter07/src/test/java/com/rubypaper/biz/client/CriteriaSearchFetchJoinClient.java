@@ -16,7 +16,7 @@ import org.junit.Test;
 import com.rubypaper.biz.domain.Department;
 import com.rubypaper.biz.domain.Employee;
 
-public class CriteriaFetchJoinSearchClient {
+public class CriteriaSearchFetchJoinClient {
 
     @Test
     public void run() {

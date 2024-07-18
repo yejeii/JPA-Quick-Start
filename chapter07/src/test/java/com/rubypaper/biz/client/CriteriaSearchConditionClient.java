@@ -146,7 +146,7 @@ public class CriteriaSearchConditionClient {
     }
 
     @Test
-    public void shouldSelectUseAndOn() {
+    public void shouldSelectUseAndOr() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter07");
         EntityManager em = emf.createEntityManager();
 
