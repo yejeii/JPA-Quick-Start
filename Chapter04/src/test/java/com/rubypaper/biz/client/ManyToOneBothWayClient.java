@@ -6,21 +6,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.junit.Test;
+
 import com.rubypaper.biz.domain.Department;
 import com.rubypaper.biz.domain.Employee;
 
+/** 양방향 통신 테스트 */
 public class ManyToOneBothWayClient {
 
-	public static void main(String[] args) {
+	@Test
+	public void run() {
 
 		// 엔티티 매니저 팩토리 생성
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter04");
 		
 		try {
 			dataInsert(emf);
-//			dataSelect(emf);
+			dataSelect(emf);
 //			dataUpdate(emf);
-			dataDelete(emf);
+			// dataDelete(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -37,8 +41,21 @@ public class ManyToOneBothWayClient {
 		// 부서 등록
 		Department department = new Department();
 		department.setName("개발부");
-		em.persist(department);		// 영속 컨테이너에 관리 상태로 등록
+		em.persist(department);	
 		
+		// 직원 등록
+		Employee employee1 = new Employee();
+		employee1.setName("둘리");
+		employee1.setDept(department);
+		em.persist(employee1);
+		
+		// 직원 등록
+		Employee employee2 = new Employee();
+		employee2.setName("도우너");
+		employee2.setDept(department);
+		em.persist(employee2);
+
+
 		// 직원 등록 (Employee ---> Department 참조)
 //		Employee employee1 = new Employee();
 //		employee1.setName("둘리");
@@ -52,18 +69,18 @@ public class ManyToOneBothWayClient {
 //		em.persist(employee2);
 		
 		// 직원 여러명 등록
-		for (int i = 1; i <= 5; i++) {
-			Employee employee = new Employee();
-			employee.setName("직원-" + i);
-			employee.setDept(department);
-		}
-		em.persist(department);
+		// for (int i = 1; i <= 5; i++) {
+			// Employee employee = new Employee();
+			// employee.setName("직원-" + i);
+			// employee.setDept(department);
+		// }
+		// em.persist(department);
 		
 		// Department.employeeList 에 Employee 등록
 //		department.getEmployeeList().add(employee1);
 //		department.getEmployeeList().add(employee2);
 		
-		System.out.println(department.getName() + "의 직원 수 : " + department.getEmployeeList().size());
+		// System.out.println(department.getName() + "의 직원 수 : " + department.getEmployeeList().size());
 		
 		em.getTransaction().commit();
 		em.close();
