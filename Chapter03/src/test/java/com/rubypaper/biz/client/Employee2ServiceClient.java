@@ -117,9 +117,12 @@ public class Employee2ServiceClient {
     }
 
     /** 엔티티 수정
-     * 
-     *  방법1. 더티 체크가 발생하도록 코드 작성 : select -> update
+     *  
+     * 방법1. 더티 체크가 발생하도록 코드 작성 : select -> update
      *  방법2. merge() 호출
+     * 
+     * 실습 >>
+     * persistence.xml 에서 ddl - "update"
      */
     @Test
     public void shouldDirtyCheck() {
@@ -143,13 +146,15 @@ public class Employee2ServiceClient {
 
     /** 분리 상태에서의 엔티티 수정
      * 
+     * 실습 >>
      * ddl - "create" 로 수정
      * 
      * 엔티티 생성 및 등록
      * 분리 : em.clear()
      * 엔티티 수정 
      * 
-     * 결과 >> DB 에 반영 X
+     * 결과 >> 
+     * DB 에 반영 X
      */
     @Test
     public void shouldNotUpdateAfterClear() {
