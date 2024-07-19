@@ -6,8 +6,8 @@ import javax.persistence.Persistence;
 
 import org.junit.Test;
 
-import com.rubypaper.biz.domain.Department;
-import com.rubypaper.biz.domain.Employee;
+import com.rubypaper.biz.domain.DepartmentWithCascade;
+import com.rubypaper.biz.domain.EmployeeWithCascade;
 
 
 /** 단방향 통신 테스트 */
@@ -38,18 +38,18 @@ public class ManyToOneOneWayClient {
 		em.getTransaction().begin();
 		
 		// 부서 등록
-		Department department = new Department();
+		DepartmentWithCascade department = new DepartmentWithCascade();
 		department.setName("개발부");
 		em.persist(department);	
 		
 		// 직원 등록
-		Employee employee1 = new Employee();
+		EmployeeWithCascade employee1 = new EmployeeWithCascade();
 		employee1.setName("둘리");
 		employee1.setDept(department);
 		em.persist(employee1);
 		
 		// 직원 등록
-		Employee employee2 = new Employee();
+		EmployeeWithCascade employee2 = new EmployeeWithCascade();
 		employee2.setName("도우너");
 		employee2.setDept(department);
 		em.persist(employee2);
@@ -106,7 +106,7 @@ public class ManyToOneOneWayClient {
 	private static void dataSelect(EntityManagerFactory emf) {
 		
 		EntityManager em = emf.createEntityManager();
-		Employee employee = em.find(Employee.class, 2L);
+		EmployeeWithCascade employee = em.find(EmployeeWithCascade.class, 2L);
 		System.out.println();
 
 		// condition + fetch 설정 결과
@@ -130,12 +130,12 @@ public class ManyToOneOneWayClient {
 		em.getTransaction().begin();
 		
 		// 신규 부서 등록
-		Department department = new Department();
+		DepartmentWithCascade department = new DepartmentWithCascade();
 		department.setName("영업부");
 		em.persist(department);
 		
 		// 부서 변경
-		Employee employee = em.find(Employee.class, 1L);
+		EmployeeWithCascade employee = em.find(EmployeeWithCascade.class, 1L);
 		employee.setDept(department);
 		em.getTransaction().commit();
 	}
@@ -168,12 +168,12 @@ public class ManyToOneOneWayClient {
 		em.getTransaction().begin();
 		
 		// 부서에 대한 참조관계 제거
-		Employee employee1 = em.find(Employee.class, 1L);
+		EmployeeWithCascade employee1 = em.find(EmployeeWithCascade.class, 1L);
 		employee1.setDept(null);
-		Employee employee2 = em.find(Employee.class, 2L);
+		EmployeeWithCascade employee2 = em.find(EmployeeWithCascade.class, 2L);
 		employee2.setDept(null);
 		
-		Department department = em.find(Department.class, 1L);
+		DepartmentWithCascade department = em.find(DepartmentWithCascade.class, 1L);
 		em.remove(department);
 		em.getTransaction().commit();
 				

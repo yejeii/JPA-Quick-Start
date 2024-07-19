@@ -29,17 +29,15 @@ public class Employee {
 	@JoinColumn(name = "DEPT_ID")
 	private Department dept;
 	
+	// 4. 사원 등록과 동시에 부서 등록
+	// 	  -> 양방향 참조 관계가 자동으로 설정됨!
 	// public void setDept(Department department) {
 		// this.dept = department;
 		
-//		if(department != null) {
-			// Department 엔티티의 컬렉션에도 Employee 참조를 설정한다.
-			// department.getEmployeeList().add(this);
-//		}
+		// Department 엔티티의 컬렉션에도 Employee 참조를 설정한다.
+		// 부서 정보가 할당되었다는 것은 부서 배치가 끝났음을 의미
+		// 따라서, 이 부서에서 현재 엔티티의 사원이 소속된다는 말과 동일함
+		// department.getEmployeeList().add(this);
 	// }
 	
-	// 부서 정보를 null 로 설정하여 직원을 대기 상태로 전환
-	// public void standby() {
-		// this.dept = null;
-	// }
 }

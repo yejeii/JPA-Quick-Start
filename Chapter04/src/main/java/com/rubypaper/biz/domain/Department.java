@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Data
-// @EqualsAndHashCode(exclude = "employeeList")	// Set 으로 인한 lombok 순환참조 문제 해결
 @Entity
 @Table(name = "S_DEPT")
 public class Department {
@@ -56,4 +55,5 @@ public class Department {
 	 */
 	@OneToMany(mappedBy = "dept", fetch=FetchType.EAGER)
 	private List<Employee> employeeList = new ArrayList<Employee>();
+
 }
