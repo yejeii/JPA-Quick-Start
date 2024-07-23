@@ -30,6 +30,6 @@ public class Product {
 	private String category;
 	
 	// 양방향 매핑
-	@OneToMany(mappedBy = "product")	// 연관관계의 소유자가 Item.product 변수임을 선언
-	private List<Item> itemList = new ArrayList<>();
+//	@OneToMany(mappedBy = "product")	// 연관관계의 소유자가 Item.product 변수임을 선언
+//	private List<Item> itemList = new ArrayList<>();
 }

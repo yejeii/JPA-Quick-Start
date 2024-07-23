@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-@ToString(exclude="dept")
+@ToString(exclude = "dept")
 @Entity
 @Table(name = "S_EMP")
 public class Employee {
