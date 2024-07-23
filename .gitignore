@@ -1,0 +1,6 @@
+# IntelliJ IDE
+.idea/
+.apt_generated/
+.apt_generated_tests/
+.classpath
+.project
