@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.domain.Page;
 
+import java.util.Arrays;
 import java.util.List;
 
 /** p.549 쿼리 메서드 사용 */
@@ -23,38 +24,49 @@ public class QueryMethodClient {
         EmployeeService eService = (EmployeeService) container.getBean("empService");
 
         dataInsert(dService, eService);
-        dataSelect(eService);
+        dataSelectQuery(eService);
 
         container.close();
     }
 
-    private void dataSelect(EmployeeService eService) {
+    private void dataSelectQuery(EmployeeService eService) {
+        Employee employee = new Employee();
+        employee.setName("개발");
+        List<Object[]> resultList = eService.getEmployeeList(employee);
+        System.out.println("검색된 직원 목록");
+        for (Object[] result : resultList) {
+//            System.out.println("---> " + result.toString());
+            System.out.println("--->" + Arrays.toString(result));
+        }
+    }
+
+    private void dataSelectBySorting(EmployeeService eService) {
         Employee employee = new Employee();
         employee.setName("");
         employee.setMailId("Dev");
-        Page<Employee> pageInfo = eService.getEmployeeList(employee, 2);
-
-        System.out.println("한 페이지에 출력되는 데이터 수 : " + pageInfo.getSize());
-        System.out.println("전체 페이지 수 : " + pageInfo.getTotalPages());
-        System.out.println("전체 데이터 수 : " + pageInfo.getTotalElements());
-
-        if(pageInfo.hasPrevious()) {
-            System.out.println("이전 페이지 : " + pageInfo.previousPageable());
-        } else {
-            System.out.println("첫 번째 페이지입니다.");
-        }
-
-        if(pageInfo.hasNext()) {
-            System.out.println("다음 페이지 : " + pageInfo.nextPageable());
-        } else {
-            System.out.println("마지막 페이지입니다.");
-        }
-
-        List<Employee> resultList = pageInfo.getContent();
-        System.out.println("\n [ 검색된 사원 목록 ]");
-        for (Employee result : resultList) {
-            System.out.println("---> " + result.toString());
-        }
+//        Page<Employee> pageInfo = eService.getEmployeeList(employee, 2);
+//
+//        System.out.println("한 페이지에 출력되는 데이터 수 : " + pageInfo.getSize());
+//        System.out.println("전체 페이지 수 : " + pageInfo.getTotalPages());
+//        System.out.println("전체 데이터 수 : " + pageInfo.getTotalElements());
+//
+//        if(pageInfo.hasPrevious()) {
+//            System.out.println("이전 페이지 : " + pageInfo.previousPageable());
+//        } else {
+//            System.out.println("첫 번째 페이지입니다.");
+//        }
+//
+//        if(pageInfo.hasNext()) {
+//            System.out.println("다음 페이지 : " + pageInfo.nextPageable());
+//        } else {
+//            System.out.println("마지막 페이지입니다.");
+//        }
+//
+//        List<Employee> resultList = pageInfo.getContent();
+//        System.out.println("\n [ 검색된 사원 목록 ]");
+//        for (Employee result : resultList) {
+//            System.out.println("---> " + result.toString());
+//        }
     }
 
     private void dataInsert(DepartmentService dService, EmployeeService eService) {
