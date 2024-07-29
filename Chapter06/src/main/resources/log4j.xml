@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE log4j:configuration SYSTEM
-"http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
     <!-- appender : 어디에 출력할 것인가 - Console창  -->
     <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
                     value="%-5p | %d{yyyy-MM-dd} | -%m%n"/>
         </layout>
     </appender>
-    
-    <!-- logger : 무슨 레벨부터 출력할 것인가 - WARN 이상의 로그 출력 -->
-    <logger name="org.hibernate.type" additivity="false">
         <level value="WARN" />
         <appender-ref ref="console" />
     </logger>
+
+    <!-- 3rdparty loggers -->
+    <logger name="org.springframework">
+        <level value="warn" />
+        <appender-ref ref="console"/>
+    </logger>
+
+    <!-- SQL 에 바인딩된 파라미터 정보 출력 -->
+    <logger name="org.hibernate.type" additivity="false">
+        <level value="TRACE"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <!-- Root Logger -->
+    <root>
+        <priority value="warn" />
+        <appender-ref ref="console"/>
+    </root>
 </log4j:configuration>
