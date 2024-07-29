@@ -16,7 +16,11 @@ public class EmployeeServiceClient {
     @Test
     public void run() {
 
-        // xml 기반의 스프링 설정
+        /* spring container 생성
+         *
+         * - 개발자가 객체 생성 및 관리를 다른 누군가에게 위임을 하고 싶음.
+         *   => new 연산자를 사용하지 않게 되어, 약결합으로 구현이 가능해짐.
+         */
         //GenericXmlApplicationContext container =
         //        new GenericXmlApplicationContext("spring/business-layer.xml");
 
@@ -24,6 +28,9 @@ public class EmployeeServiceClient {
         AnnotationConfigApplicationContext container =
                 new AnnotationConfigApplicationContext(SpringConfiguration.class);
 
+        /*
+         * spring container 에게 객체 생성을 위임하여, 필요한 객체는 불러서 사용하면 됨.
+         */
         DepartmentService dService = (DepartmentService) container.getBean("deptService");
         EmployeeService eService = (EmployeeService) container.getBean("empService");
 

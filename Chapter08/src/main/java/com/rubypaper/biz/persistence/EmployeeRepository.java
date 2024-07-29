@@ -41,7 +41,13 @@ public class EmployeeRepository {
         // 즉, multi 행 조회에선 @ManyToOne(EAGER) 로 설정해도 JOIN 발생 X
         //return em.createQuery("FROM Employee emp ORDER BY emp.id DESC").getResultList();
 
-        // 직원 정보 조회시, 관련 부서 정보까지 함께 가져오기 위해 페치 조인 사용
+        /* 직원 정보 조회시, 관련 부서 정보까지 함께 가져오기 위해 페치 조인 사용
+         *
+         * join 이 동작하는 경우.
+         * 	  - 묵시적 : select 절에 직원 객체 및 연관 관계의 부서 객체까지 포함되도록 작성.
+         * 	  - 명시적 : JOIN FETCH를 명시적으로 작성.
+         *             inner join, outer join 등
+         */
         return em.createQuery("FROM Employee emp JOIN FETCH emp.dept dept ORDER BY emp.id DESC").getResultList();
     }
 }

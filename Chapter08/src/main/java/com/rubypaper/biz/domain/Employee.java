@@ -21,7 +21,12 @@ public class Employee {
 	private String mailId;
 	
 	private Double salary;
-	
+
+	/* @ManyToOne
+	 *
+	 * - fetch 의 기본 속성값 : EAGER.
+	 *   One 에 해당하는 데이터는 항상 EAGER 로 해도 크게 문제가 되지 않으므로
+	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="DEPT_ID")
 	private Department dept;

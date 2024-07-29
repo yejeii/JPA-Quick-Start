@@ -16,15 +16,29 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration  // 해당 클래스는 스프링 설정 클래스임
-@ComponentScan(basePackages = "com.rubypaper.biz")  // 객체 스캔, 생성
+@Configuration  // 현재 클래스가 스프링 설정 클래스임을 컨테이너에게 알려줌.
+@ComponentScan(basePackages = "com.rubypaper.biz")  // 스프링 컨테이너가 생성할 객체의 클래스를 탐색하기 위한 기준 위치 정보
+/* @EnableTransactionManagement
+ *
+ * business-layer.xml 의 트랜잭션 설정 대신에 스프링 설정 클래스에서
+ * @EnableTransactionManagement 어노테이션을 통해서
+ * @Transactional 을 활성화. => 어노테이션 기반의 트랜잭션 관리가 가능해짐.
+ *
+ * 비즈니스 클래스에 @Transactional 어노테이션을 정의하면,
+ * 비즈니스 메소드에 대한 트랜잭션 관리를 알아서 해줌.
+ */
 @EnableTransactionManagement    // 트랜잭션 설정
 @EnableJpaRepositories(basePackages = "com.rubypaper.biz.repository",   // 스프링 컨테이너가 레파지토리 인터페이스를 인지하여 레파지토리 인터페이스에 대한 구현 객체 생성하도록 함
                         entityManagerFactoryRef = "factoryBean",
                         transactionManagerRef = "txManager")
 public class SpringConfiguration {
 
-    @Bean   // 스프링 컨테이너, @Bean 이 설정한 메서드를 호출하고 리턴한 객체를 관리함
+    /* @Bean
+     *
+     * business-layer.xml 의 <bean> 설정과 동일함.
+     * 스프링 컨테이너는 @Bean 이 설정된 메소드를 호출한 후 반환된 객체를 스프링 컨테이너에서 관리함.
+     */
+    @Bean
     public HibernateJpaVendorAdapter vendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         return adapter;

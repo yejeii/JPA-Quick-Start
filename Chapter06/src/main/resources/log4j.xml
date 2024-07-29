@@ -12,6 +12,9 @@
                     value="%-5p | %d{yyyy-MM-dd} | -%m%n"/>
         </layout>
     </appender>
+
+    <!-- Application Loggers -->
+    <logger name="org.rubypaper.biz">
         <level value="WARN" />
         <appender-ref ref="console" />
     </logger>
