@@ -21,25 +21,27 @@ import lombok.ToString;
 @Table(name = "S_CUSTOMER")
 public class Customer {
 	
-	// ȸ�� ���̵�
+	// 회원 아이디
 	@Id	@GeneratedValue
 	@Column(name = "CUSTOMER_ID")
 	private Long id;			
 
-	// ȸ�� �̸�
+	// 회원 이름
 	private String name;		
 
-	// ȸ�� ��ȭ��ȣ
+	// 회원 전화번호
 	private String phone;		
 
-	// ȸ�� Ư¡ ����
+	// 회원 특징 설명
 	private String comments;		
 
-	// ȸ�� �ּ�
-	@Embedded
+	// 회원 주소
+	@Embedded	// @Embeddable 로 정의된 객체 참조 -> Address 클래스의 인스턴스 변수가 해당 엔티티의 칼럼으로 등록됨
 	private Address address; 	
 	
-	// �ֹ� ���
+	// 주문 목록
+	// Order Entity 가 생성자를 통해 객체로 생성되면,
+	// Order Entity 가 바로 설정됨 ( 연관관계 유지를 위함 )
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
 	private List<Order> orderList = new ArrayList<Order>();
 

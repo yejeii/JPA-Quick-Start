@@ -16,13 +16,13 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	// È¸¿ø µî·Ï È­¸éÀ¸·Î ÀÌµ¿
+	// íšŒì› ë“±ë¡ í™”ë©´ìœ¼ë¡œ ì´ë™
 	@GetMapping("/customer/new")
 	public String insertCustomer() {
 		return "customer/insertCustomer";
 	}
 
-	// È¸¿ø µî·Ï ±â´É Ã³¸®
+	// íšŒì› ë“±ë¡ ê¸°ëŠ¥ ì²˜ë¦¬
 	@PostMapping("/customer/new")
 	public String insertCustomer(Customer customer, Address address) {
 		customer.setAddress(address);
@@ -30,7 +30,7 @@ public class CustomerController {
 		return "redirect:/getCustomerList";
 	}
 
-	// È¸¿ø ¸ñ·Ï Á¶È¸ ±â´É Ã³¸®
+	// íšŒì› ëª©ë¡ ì¡°íšŒ ê¸°ëŠ¥ ì²˜ë¦¬
 	@GetMapping("/getCustomerList")
 	public String getCustomerList(Model model) {
 		model.addAttribute("customerList", customerService.getCustomerList());

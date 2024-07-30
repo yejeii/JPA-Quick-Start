@@ -23,19 +23,19 @@ public class OrderRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	// ÁÖ¹® µî·Ï 
+	// ì£¼ë¬¸ ë“±ë¡ 
 	public void insertOrder(Order order) {
 		em.persist(order);
 	}
 
-	// ÁÖ¹® »ó¼¼ Á¶È¸ 
+	// ì£¼ë¬¸ ìƒì„¸ ì¡°íšŒ 
 	public Order getOrder(Long id) {
 		return em.find(Order.class, id);
 	}
 
-	// ÁÖ¹® ¸ñ·Ï °Ë»ö 
+	// ì£¼ë¬¸ ëª©ë¡ ê²€ìƒ‰ 
 	public List<Order> getOrderList(Order order) {
-		// Criteria¸¦ ÀÌ¿ëÇÑ µ¿Àû Äõ¸®
+		// Criteriaë¥¼ ì´ìš©í•œ ë™ì  ì¿¼ë¦¬
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Order> criteriaQuery = builder.createQuery(Order.class);
 
@@ -60,10 +60,10 @@ public class OrderRepository {
 			criteria.add(status);
 		}
 
-		// Predicate ¹è¿­À» ÀÌ¿ëÇÏ¿© µ¿Àû WHEREÀı »ı¼º
+		// Predicate ë°°ì—´ì„ ì´ìš©í•˜ì—¬ ë™ì  WHEREì ˆ ìƒì„±
 		criteriaQuery.where(builder.and(criteria.toArray(new Predicate[criteria.size()])));
 		
-		// SELECT Àü¼Û
+		// SELECT ì „ì†¡
 		TypedQuery<Order> query = em.createQuery(criteriaQuery).setMaxResults(1000);
 		return query.getResultList();
 	}

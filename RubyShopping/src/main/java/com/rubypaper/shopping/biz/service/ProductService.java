@@ -16,17 +16,17 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 
-	// »óÇ° µî·Ï È¤Àº ¼öÁ¤
+	// ìƒí’ˆ ë“±ë¡ í˜¹ì€ ìˆ˜ì •
 	public void insertOrUpdateProduct(Product product) {
 		productRepository.insertOrUpdateProduct(product);
 	}
 
-	// »óÇ° »ó¼¼ Á¶È¸
+	// ìƒí’ˆ ìƒì„¸ ì¡°íšŒ
 	public Product getProduct(Long productId) {
 		return productRepository.getProduct(productId);
 	}
 
-	// »óÇ° ¸ñ·Ï °Ë»ö
+	// ìƒí’ˆ ëª©ë¡ ê²€ìƒ‰
 	public List<Product> getProductList() {
 		return productRepository.getProductList();
 	}

@@ -20,39 +20,45 @@ import lombok.ToString;
 @ToString(exclude = {"order", "product"})
 public class Item {
 
-	// ÁÖ¹®³»¿ª ¾ÆÀÌµğ
+	/** ë¹„ì‹ë³„ ê´€ê³„ ì„¤ì •
+	 *
+	 * id -> PK
+	 * order, product -> FK
+	 */
+	// ì£¼ë¬¸ë‚´ì—­ ì•„ì´ë””
 	@Id	@GeneratedValue
-	@Column(name = "ITEM_ID")
+	@Column(name = "ITEM_ID")	// PK
 	private Long id;
 
-	// ÁÖ¹® ÂüÁ¶
+	// ì£¼ë¬¸ ì°¸ì¡°
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDER_ID")
+	@JoinColumn(name = "ORDER_ID")	// FK
 	private Order order;
 
-	// »óÇ° ÂüÁ¶
+	// ìƒí’ˆ ì°¸ì¡°
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PRODUCT_ID")
+	@JoinColumn(name = "PRODUCT_ID")	// FKã„±
 	private Product product;
 	
-	// ÁÖ¹® ¼ö·®
+	// ì£¼ë¬¸ ìˆ˜ëŸ‰
 	private int count;
 
-	// ÁÖ¹®³»¿ª »ı¼ºÀÚ
+	// ì£¼ë¬¸ë‚´ì—­ ìƒì„±ì
+	// Item ì˜ ìƒì„±ìê°€ í˜¸ì¶œ == ì£¼ë¬¸ ë°œìƒ
 	public Item(Product product, int count) {
-		this.product = product;
-		this.count = count;
+		this.product = product;	// ì£¼ë¬¸í•œ ìƒí’ˆ ì •ë³´
+		this.count = count;	// ì£¼ë¬¸í•œ ìƒí’ˆ ìˆ˜ëŸ‰
 
-		// ÁÖ¹®ÀÌ »ı¼ºµÈ ¼ø°£ ÁÖ¹® ¼ö·®¸¸Å­ Àç°í¸¦ °¨¼ÒÇÑ´Ù.
+		// ì£¼ë¬¸ì´ ìƒì„±ëœ ìˆœê°„ ì£¼ë¬¸ ìˆ˜ëŸ‰ë§Œí¼ ì¬ê³ ë¥¼ ê°ì†Œí•œë‹¤.
 		reduceStock(count);
 	}
 
-	// ÁÖ¹® ¹ß»ı ½Ã¿¡ »óÇ° Àç°í·®À» °¨¼Ò½ÃÅ²´Ù.
+	// ì£¼ë¬¸ ë°œìƒ ì‹œì— ìƒí’ˆ ì¬ê³ ëŸ‰ì„ ê°ì†Œì‹œí‚¨ë‹¤.
 	public void reduceStock(int count) {
 		product.reduceStock(count);
 	}
 
-	// ÁÖ¹® Ãë¼Ò ½Ã¿¡ Àç°í·®À» ¿ø·¡´ë·Î µÇµ¹¸°´Ù.
+	// ì£¼ë¬¸ ì·¨ì†Œ ì‹œì— ì¬ê³ ëŸ‰ì„ ì›ë˜ëŒ€ë¡œ ë˜ëŒë¦°ë‹¤.
 	public void restoreStock() {
 		product.restoreStock(count);
 	}

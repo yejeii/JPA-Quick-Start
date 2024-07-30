@@ -13,30 +13,30 @@ import lombok.Data;
 @Data
 public class Product {
 
-	// »óÇ° ¾ÆÀÌµğ
+	// ìƒí’ˆ ì•„ì´ë””
 	@Id	@GeneratedValue
 	@Column(name = "PRODUCT_ID")
 	private Long id;
 
-	// »óÇ° ÀÌ¸§
+	// ìƒí’ˆ ì´ë¦„
 	private String name;
 
-	// »óÇ° °¡°İ
+	// ìƒí’ˆ ê°€ê²©
 	private int price;
 
-	// »óÇ° ¼ö·®
+	// ìƒí’ˆ ìˆ˜ëŸ‰
 	private int quantity;
 
-	// ÁÖ¹® Á¤º¸ »ı¼º ½Ã¿¡ Àç°í ¼ö·®À» °¨¼Ò½ÃÅ²´Ù.
-	public void reduceStock(int quantity) {
-		this.quantity = this.quantity - quantity;
-		// Àç°í ¼ö·®ÀÌ ºÎÁ·ÇÏ¸é ¿¹¿Ü¸¦ ¹ß»ı½ÃÅ²´Ù.
+	// ì£¼ë¬¸ ì •ë³´ ìƒì„± ì‹œì— ì¬ê³  ìˆ˜ëŸ‰ì„ ê°ì†Œì‹œí‚¨ë‹¤.
+	public void reduceStock(int q) {
+		this.quantity = this.quantity - q;
+		// ì¬ê³  ìˆ˜ëŸ‰ì´ ë¶€ì¡±í•˜ë©´ ì˜ˆì™¸ë¥¼ ë°œìƒì‹œí‚¨ë‹¤.
 		if (quantity < 0) {
-			throw new IllegalStateException("Àç°í°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			throw new IllegalStateException("ì¬ê³ ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 		}
 	}
 
-	// ÁÖ¹® Ãë¼Ò ½Ã¿¡ Àç°í ¼ö·®À» ¿ø·¡´ë·Î µÇµ¹¸°´Ù.
+	// ì£¼ë¬¸ ì·¨ì†Œ ì‹œì— ì¬ê³  ìˆ˜ëŸ‰ì„ ì›ë˜ëŒ€ë¡œ ë˜ëŒë¦°ë‹¤.
 	public void restoreStock(int quantity) {
 		this.quantity = this.quantity + quantity;
 	}

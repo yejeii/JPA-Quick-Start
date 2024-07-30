@@ -2,9 +2,9 @@ package com.rubypaper.shopping.biz.domain;
 
 public enum OrderStatus {
 
-	// 'аж╧╝' ╩Себ
+	// 'Лё╪К╛╦' Л┐│М┐°
 	ORDER, 	
 	
-	// 'аж╧╝ цК╪р' ╩Себ
+	// 'Лё╪К╛╦ Л╥╗Л├▄' Л┐│М┐°
 	CANCEL 	
 }

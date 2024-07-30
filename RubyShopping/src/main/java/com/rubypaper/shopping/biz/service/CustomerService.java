@@ -16,17 +16,17 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	// È¸¿ø µî·Ï 
+	// íšŒì› ë“±ë¡ 
 	public void insertCustomer(Customer customer) {
 		customerRepository.insertCustomer(customer);
 	}
 
-	// È¸¿ø »ó¼¼ Á¶È¸
+	// íšŒì› ìƒì„¸ ì¡°íšŒ
 	public Customer getCustomer(Long customerId) {
 		return customerRepository.getCustomer(customerId);
 	}
 	
-	// È¸¿ø ¸ñ·Ï °Ë»ö
+	// íšŒì› ëª©ë¡ ê²€ìƒ‰
 	public List<Customer> getCustomerList() {
 		return customerRepository.getCustomerList();
 	}

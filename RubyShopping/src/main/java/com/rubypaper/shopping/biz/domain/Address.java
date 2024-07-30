@@ -4,6 +4,10 @@ import javax.persistence.Embeddable;
 
 import lombok.Data;
 
+/*
+ * Not Entity Class
+ * 다른 엔티티에 포함되는 클래스 -> Embeddable
+ */
 @Embeddable
 @Data
 public class Address {

@@ -30,58 +30,67 @@ import lombok.ToString;
 @ToString(exclude = {"customer", "itemList", "searchCustomerName", "searchOrderStatus"})
 public class Order {	
 
-	// ÁÖ¹® ¾ÆÀÌµğ
+	// ì£¼ë¬¸ ì•„ì´ë””
 	@Id	@GeneratedValue
 	@Column(name = "ORDER_ID")
 	private Long id;					
 	
-	// È¸¿ø ÂüÁ¶
+	// íšŒì› ì°¸ì¡°
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CUSTOMER_ID")
+	@JoinColumn(name = "CUSTOMER_ID")	// FK ì„¤ì •
 	private Customer customer;			
 	
-	// ÁÖ¹® »óÅÂ
+	// ì£¼ë¬¸ ìƒíƒœ
+	// EnumType.STRING : enum ì˜ ê°’ ìì²´ê°€ ë¬¸ì ê·¸ëŒ€ë¡œ(ORDER, CANCEL) í…Œì´ë¸”ì— ì €ì¥
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;			
 	
-	// ÁÖ¹® ³¯Â¥
+	// ì£¼ë¬¸ ë‚ ì§œ
 	private Date orderDate;				
 
-	/** °Ë»ö °ü·Ã Á¤º¸ */	
-	// °Ë»öÇÒ È¸¿ø ÀÌ¸§
+	/** ê²€ìƒ‰ ê´€ë ¨ ì •ë³´
+	 *
+	 * ê²€ìƒ‰ ê´€ë ¨ ì •ë³´ì´ë¯€ë¡œ Entity ì˜ ë©¤ë²„ë¡œ ì‚¬ìš©í•  í•„ìš” X
+	 * -> @Transient : ì˜ì† ëŒ€ìƒì—ì„œ ì œì™¸ -> í…Œì´ë¸” ì¹¼ëŸ¼ì—ì„œ ì œì™¸
+	 */
+	// ê²€ìƒ‰í•  íšŒì› ì´ë¦„
 	@Transient
 	private String searchCustomerName;		
 	
-	// °Ë»öÇÒ ÁÖ¹® »óÅÂ
+	// ê²€ìƒ‰í•  ì£¼ë¬¸ ìƒíƒœ
 	@Transient
 	private OrderStatus searchOrderStatus;
 	
-	// ÁÖ¹®³»¿ª ¸ñ·Ï
+	// ì£¼ë¬¸ë‚´ì—­ ëª©ë¡
+	// ê´€ê³„ Entity ì˜ ì˜ì†ì„± ì„¤ì • -> CascadeType.ALL == Item ì—”í‹°í‹°ëŠ” Order ì—”í‹°í‹°ì˜ ìƒëª…ì£¼ê¸°ì™€ í•¨ê»˜í•˜ë„ë¡ ì„¤ì •
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Item> itemList = new ArrayList<Item>(); 
 
-	// ÁÖ¹® »ı¼ºÀÚ : È¸¿ø°ú ÁÖ¹® ³»¿ª °´Ã¼¸¦ ÀÌ¿ëÇÏ¿© ÁÖ¹®À» ±¸¼ºÇÑ´Ù. 
-	public Order(Customer customer, Item item) { 		
+	// ì£¼ë¬¸ ìƒì„±ì : íšŒì›ê³¼ ì£¼ë¬¸ ë‚´ì—­ ê°ì²´ë¥¼ ì´ìš©í•˜ì—¬ ì£¼ë¬¸ì„ êµ¬ì„±í•œë‹¤. 
+	public Order(Customer customer, Item item) {
+		// ìƒì„±ìë¥¼ í†µí•´ ì£¼ë¬¸ ì—”í‹°í‹° ìƒì„±ë  ë•Œ, ë°”ë¡œ ê³ ê°ê³¼ ì£¼ë¬¸ ì •ë³´ì˜ ì—°ê´€ê´€ê³„ë¥¼ ë§ºì–´ì£¼ê¸° ìœ„í•¨
 		setCustomer(customer);
 		addItem(item);	
-		this.status = OrderStatus.ORDER; 	// ÁÖ¹® »ı¼º ½Ã »óÅÂ´Â ORDER
+		this.status = OrderStatus.ORDER; 	// ì£¼ë¬¸ ìƒì„± ì‹œ ìƒíƒœëŠ” ORDER
 		this.orderDate = new Date();
 	}
 	
-	// È¸¿ø ¼³Á¤½Ã¿¡ È¸¿ø ÂÊ¿¡µµ ¾ç¹æÇâ ÂüÁ¶ ¼³Á¤
+	// íšŒì› ì„¤ì •ì‹œì— íšŒì› ìª½ì—ë„ ì–‘ë°©í–¥ ì°¸ì¡° ì„¤ì •
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+		// ìƒì„±ìë¥¼ í†µí•´ ì£¼ë¬¸ ì—”í‹°í‹°ê°€ ìƒì„±ë˜ë©´, ê³ ê°ê³¼ì˜ ì—°ê´€ê´€ê³„ë¥¼ ì„¤ì •
 		customer.getOrderList().add(this);
 	}
 	
-	// ÁÖ¹®³»¿ª ¼³Á¤ ½Ã¿¡ ÁÖ¹®³»¿ª¿¡µµ ¾ç¹æÇâ ÂüÁ¶ ¼³Á¤
+	// ì£¼ë¬¸ë‚´ì—­ ì„¤ì • ì‹œì— ì£¼ë¬¸ë‚´ì—­ì—ë„ ì–‘ë°©í–¥ ì°¸ì¡° ì„¤ì •
 	public void addItem(Item item) {
 		itemList.add(item);
-		item.setOrder(this);
+		item.setOrder(this);	// ì—°ê´€ê´€ê³„ í…Œì´ë¸”ì˜ FK ë¥¼ ì„¤ì • -> order(FK) -> ë¹„ì‹ë³„ ê´€ê³„ ìœ ì§€
 	}
 
-	// ÁÖ¹® Ãë¼Ò Ã³¸®
+	// ì£¼ë¬¸ ì·¨ì†Œ ì²˜ë¦¬
 	public void orderCancel() {
+		// ì£¼ë¬¸ ìƒíƒœ ë©¤ë²„ ë³€ìˆ˜ë¥¼ ORDER ì—ì„œ CANCEL ë¡œ ìˆ˜ì •
 		this.setStatus(OrderStatus.CANCEL);
 		for (Item item : itemList) {
 			item.restoreStock();

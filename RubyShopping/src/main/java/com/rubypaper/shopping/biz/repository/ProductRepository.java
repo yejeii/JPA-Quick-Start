@@ -15,9 +15,9 @@ public class ProductRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	// »óÇ° µî·Ï ¶Ç´Â ¼öÁ¤
+	// ìƒí’ˆ ë“±ë¡ ë˜ëŠ” ìˆ˜ì •
 	public void insertOrUpdateProduct(Product product) {
-		// ÆÄ¶ó¹ÌÅÍ·Î Àü´ŞµÈ »óÇ°¿¡ ¾ÆÀÌµğ Á¸Àç ¿©ºÎ¿¡ µû¶ó¼­ µî·Ï/¼öÁ¤ÀÌ ºĞ±â Ã³¸®µÈ´Ù.
+		// íŒŒë¼ë¯¸í„°ë¡œ ì „ë‹¬ëœ ìƒí’ˆì— ì•„ì´ë”” ì¡´ì¬ ì—¬ë¶€ì— ë”°ë¼ì„œ ë“±ë¡/ìˆ˜ì •ì´ ë¶„ê¸° ì²˜ë¦¬ëœë‹¤.
 		if (product.getId() == null) {
 			em.persist(product);
 		} else {
@@ -25,12 +25,12 @@ public class ProductRepository {
 		}
 	}
 
-	// »óÇ° »ó¼¼ Á¶È¸
+	// ìƒí’ˆ ìƒì„¸ ì¡°íšŒ
 	public Product getProduct(Long id) {
 		return em.find(Product.class, id);
 	}
 
-	// »óÇ° ¸ñ·Ï Á¶È¸
+	// ìƒí’ˆ ëª©ë¡ ì¡°íšŒ
 	public List<Product> getProductList() {
 		return em.createQuery("SELECT p FROM Product p ORDER BY p.id", Product.class).getResultList();
 	}

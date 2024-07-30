@@ -17,20 +17,20 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	// »óÇ° µî·Ï È­¸éÀ¸·Î ÀÌµ¿
+	// ìƒí’ˆ ë“±ë¡ í™”ë©´ìœ¼ë¡œ ì´ë™
 	@GetMapping("/product/new")
 	public String insertProduct() {
 		return "product/insertProduct";
 	}
 
-	// »óÇ° µî·Ï ±â´É Ã³¸®
+	// ìƒí’ˆ ë“±ë¡ ê¸°ëŠ¥ ì²˜ë¦¬
 	@PostMapping("/product/new")
 	public String insertProduct(Product product) {
 		productService.insertOrUpdateProduct(product);
 		return "redirect:/getProductList";
 	}
 	
-	// »óÇ° Á¤º¸ »ó¼¼ È­¸éÀ¸·Î ÀÌµ¿
+	// ìƒí’ˆ ì •ë³´ ìƒì„¸ í™”ë©´ìœ¼ë¡œ ì´ë™
 	@GetMapping("/product/{productId}/get")
 	public String getProduct(@PathVariable("productId") Long productId, Model model) {
 		Product product = productService.getProduct(productId);
@@ -39,7 +39,7 @@ public class ProductController {
 	}
 
 	
-	// »óÇ° ¸ñ·Ï ±â´É Ã³¸®
+	// ìƒí’ˆ ëª©ë¡ ê¸°ëŠ¥ ì²˜ë¦¬
 	@GetMapping("/getProductList")
 	public String getProductList(Model model) {
 		List<Product> productList = productService.getProductList();

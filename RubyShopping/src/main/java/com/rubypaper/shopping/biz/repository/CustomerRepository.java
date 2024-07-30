@@ -15,17 +15,17 @@ public class CustomerRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	// È¸¿ø µî·Ï
+	// íšŒì› ë“±ë¡
 	public void insertCustomer(Customer customer) {
 		em.persist(customer);
 	}
 
-	// È¸¿ø »ó¼¼ Á¶È¸
+	// íšŒì› ìƒì„¸ ì¡°íšŒ
 	public Customer getCustomer(Long id) {
 		return em.find(Customer.class, id);
 	}
 
-	// È¸¿ø ¸ñ·Ï °Ë»ö
+	// íšŒì› ëª©ë¡ ê²€ìƒ‰
 	public List<Customer> getCustomerList() {
 		return em.createQuery("SELECT c FROM Customer c ORDER BY c.id", 
 		Customer.class).getResultList();

@@ -29,23 +29,23 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
-	// ÁÖ¹® µî·Ï È­¸éÀ¸·Î ÀÌµ¿
+	// ì£¼ë¬¸ ë“±ë¡ í™”ë©´ìœ¼ë¡œ ì´ë™
 	@GetMapping("/order/new")
 	public String insertOrder(Model model) {
-		// ÁÖ¹® µî·Ï È­¸é¿¡¼­ »ç¿ëÇÒ È¸¿ø ¸ñ·Ï°ú »óÇ° ¸ñ·Ï Á¶È¸
+		// ì£¼ë¬¸ ë“±ë¡ í™”ë©´ì—ì„œ ì‚¬ìš©í•  íšŒì› ëª©ë¡ê³¼ ìƒí’ˆ ëª©ë¡ ì¡°íšŒ
 		model.addAttribute("customerList", customerService.getCustomerList());
 		model.addAttribute("productList", productService.getProductList());
 		return "order/insertOrder";
 	}
 	
-	// ÁÖ¹® µî·Ï ±â´É Ã³¸®
+	// ì£¼ë¬¸ ë“±ë¡ ê¸°ëŠ¥ ì²˜ë¦¬
 	@PostMapping("/order/new")
 	public String insertOrder(Long customerId, Long productId, int count) {
 		orderService.insertOrder(customerId, productId, count);
 		return "redirect:/getOrderList";
 	}
 
-	// ÁÖ¹® ¸ñ·Ï °Ë»ö ±â´É Ã³¸®
+	// ì£¼ë¬¸ ëª©ë¡ ê²€ìƒ‰ ê¸°ëŠ¥ ì²˜ë¦¬
 	@RequestMapping("/getOrderList")
 	public String getOrderList(@ModelAttribute("searchInfo") Order order, 
 		Model model) {
@@ -54,7 +54,7 @@ public class OrderController {
 		return "order/getOrderList";
 	}
 
-	// ÁÖ¹® Ãë¼Ò Ã³¸®
+	// ì£¼ë¬¸ ì·¨ì†Œ ì²˜ë¦¬
 	@GetMapping("/order/{orderId}/orderCancel")
 	public String orderCancel(@PathVariable("orderId") Long orderId) {
 		orderService.orderCancel(orderId);
