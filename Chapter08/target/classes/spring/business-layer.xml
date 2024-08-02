@@ -13,7 +13,13 @@
                             http://www.springframework.org/schema/tx
                             http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-    <!-- 컴포넌트 스캔 설정 -->
+    <!-- 컴포넌트 스캔(@Service, @Repository 객체 생성)
+		스프링 컨테이너가 객체 생성을 하기 위해, 참조할 위치 정보로 사용하고,
+		이 경로에 있는 모든 클래스를 대상으로, @Service, @Repository 등의
+		어노테이션이 선언되어 있는 클래스를 탐색.
+
+		존재한다면, 컨테이너에서 객체를 생성해서 관리함.
+	-->
     <context:component-scan base-package="com.rubypaper.biz"/>
 
     <!-- JPA 구현체 -->
@@ -29,7 +35,14 @@
         <property name="password" value=""/>
     </bean>
 
-    <!-- EntityManager 공장 -->
+    <!-- EntityManager 공장 (id가 entityManagerFactory로 고정)
+
+		spring container 가 LocalContainerEntityManagerFactoryBean 객체를 이용하여,
+		영속성 컨테이너를 생성.
+
+		entity manager 를 생성하기 위해서, 기존에 persistence.xml 을 참조했었으나,
+		JPA 프로퍼티 설정 정보(데이터소스, JPA 구현체 관련, dialet class) 를 통합해서 참조함.
+	-->
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
@@ -52,17 +65,47 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <!-- Transaction 어드바이스 설정 -->
+    <!-- AOP 적용
+		주기능과 부기능을 구분해서, 배(비즈니스 로직)보다 배꼽(트랜잭션)이 크지는 상황을 피하기 위함.
+	 -->
+    <!-- Transaction 어드바이스(부기능) 설정 -->
+    <!-- Transaction 관리 기능은 스프링 컨테이너가 <tx:advice> 설정을 참조하여 자동으로 처리해 줌.
+    -->
     <tx:advice id="txAdvice" transaction-manager="txManager">
+        <!-- Transaction advice 동작 시점을 설정 -->
         <tx:attributes>
+            <!-- name : 트랜잭션이 적용될 메소드명을 명시.
+						* : 모든 메소드에 트랜잭션을 적용
+				 rollback-for : rollback 기준이 되는 Exception 타입을 명시.
+			 -->
             <tx:method name="*" rollback-for="Exception"/>
         </tx:attributes>
     </tx:advice>
 
     <!-- Transaction AOP 설정 -->
     <aop:config>
+        <!-- 어드바이스(부기능) 을 적용받는 대상에 대한 필터를 명시
+
+			* com.rubypaper.biz.service..*Service.*(..) 를 구분하면, 아래의 4가지 항목으로 구분이 됨.
+
+			- 리턴타입 : *
+			   		- 모든 리턴타입이 대상
+			- 패키지 경로 : com.rubypaper.biz.service
+					- 패키지 경로
+			- 클래스 명 : ..*Service
+					- 지정된 패키지 내에서 클래스명이 Service 로 끝나는 모든 클래스
+					  .. : 지정된 패키지 경로의 서브 패키지의 클래스까지 포함
+			- 메소드 명 : *(..)
+					- 0개 이상의 매개변수를 가지는 모든 메소드
+					  () : 매개변수가 없음.
+					  (*) : 타입은 관계가 없고, 하나의 매개변수를 가짐.
+					  (*, *) : 타입은 관계가 없고, 두 개의 매개변수를 가짐.
+		 -->
         <aop:pointcut id="txPointcut" expression="execution(* com.rubypaper.biz.service..*Service.*(..))"/>
 
+        <!-- 어드바이스(부기능)는 트랜잭션 관리기능(txAdvice) 이고,
+             어드바이스(부기능) 을 적용받는 대상(txPointcut)을 명시.
+        -->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
     </aop:config>
 </beans>
