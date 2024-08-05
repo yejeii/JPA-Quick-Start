@@ -19,9 +19,10 @@ public class ManyToOneBothWayClient {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter04");
 		
 		try {
-			dataInsertBothMapping(emf);
-			dataSelect(emf);
-//			dataUpdate(emf);
+			//dataInsertBothMapping(emf);
+			//dataSelect(emf);
+			shouldPersistenceCascade(emf);
+			//dataUpdate(emf);
 			// dataDelete(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +64,9 @@ public class ManyToOneBothWayClient {
 		// 	  -> null 로 설정
 		// Department department = new Department();
 		// department.setName("개발부");
-		// department.getEmployeeList().add(employee1);	
+		// department.getEmployeeList().add(employee1);
 		// department.getEmployeeList().add(employee2);
-		// em.persist(department);	
+		// em.persist(department);
 		
 		// 3. 엔티티 양방향 설정에 부합하기 위해 부서 객체의 직원 참조 변수에 직원 등록
 		// 	  문제 : 부서 엔티티에서 사원 정보 등록 기능을 부서 엔티티에서 구현하고 싶음
@@ -74,16 +75,15 @@ public class ManyToOneBothWayClient {
 		// department.getEmployeeList().add(employee2);
 		
 		System.out.println(department.getName() + "의 직원 수 : " + department.getEmployeeList().size());
-
 		em.getTransaction().commit();
 
 		// 양방향 참조되는지 확인
 		// Department findDept = em.find(Department.class, 1L);
-		
+		//
 		// System.out.println("검색된 부서 : " + findDept.getName());
 		// System.out.println("부서에 소속된 직원 명단");
 		// for(Employee employee : findDept.getEmployeeList()) {
-			// System.out.println(employee.getName() + "(" + employee.getDept().getName() + ")");
+		//	 System.out.println(employee.getName() + "(" + employee.getDept().getName() + ")");
 		// }
 		// 분명 소속된 사원이 있지만 출력이 안되고 있음
 
@@ -134,8 +134,8 @@ public class ManyToOneBothWayClient {
 
 		// LEFT OUTER JOIN 일 때, 한방에 가져와서 1차 캐시에 각각 저장됨
 		// -> SELECT 문 생성 X
-		Employee em1 = em.find(Employee.class, 1L);
-		em.close();
+		//Employee em1 = em.find(Employee.class, 1L);
+		//em.close();
 	}
 	
 	private static void dataUpdate(EntityManagerFactory emf) {

@@ -21,9 +21,9 @@ public class ManyToOneBothWayWithCascadeClient {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter04");
 		
 		try {
-			// dataInsertWithPersistenceCascade(emf);
-            // dataDeleteWithPersistenceCascade(emf);
-            dataDeleteWithOrphanRemoval(emf);
+			 dataInsertWithPersistenceCascade(emf);
+             dataDeleteWithPersistenceCascade(emf);
+            //dataDeleteWithOrphanRemoval(emf);
             // dataDeleteWithNull(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class ManyToOneBothWayWithCascadeClient {
 		EmployeeWithCascade employee1 = new EmployeeWithCascade();
 		employee1.setName("보보");
 		employee1.setDept(department);
-		em.persist(employee1);
+		//em.persist(employee1);
 
 		em.getTransaction().commit();
 		em.close();
@@ -88,14 +88,14 @@ public class ManyToOneBothWayWithCascadeClient {
 		em.getTransaction().begin();
 		
 		// 부서 검색
-		DepartmentWithCascade department = em.find(DepartmentWithCascade.class, 3L);
+		DepartmentWithCascade department = em.find(DepartmentWithCascade.class, 1L);
 		
 		// 부서에 등록된 직원 삭제
         // CASECADE 전에는 일일이 삭제시켜야 하는 번거로움..
         // -> CASCADE 로 자동 처리되게 하자
 		// List<EmployeeWithCascade> employeeList = department.getEmployeeList();
 		// for(EmployeeWithCascade employee : employeeList) {
-			// em.remove(employee);
+		//	 em.remove(employee);
 		// }
 
         // 부서 삭제
