@@ -46,12 +46,12 @@ public class EmployeeWithCascade {
 		 */
 
 		// 방법1. setDept에 null 체크 추가
-		//if(department != null) {
+		if(department != null) {
 			// Department 엔티티의 컬렉션에도 Employee 참조를 설정한다.
 			// 부서 정보가 할당되었다는 것은 부서 배치가 끝났음을 의미
 			// 따라서, 이 부서에서 현재 엔티티의 사원이 소속된다는 말과 동일함
 			department.getEmployeeList().add(this);
-		//}
+		}
 	}
 	
 	// 부서 정보를 null 로 설정하여 직원을 대기 상태로 전환

@@ -40,10 +40,10 @@ public class ManyToManyBothWayRelationEntityClient {
 		System.out.println("주문 날짜 : " + order.getOrderDate());
 		System.out.println("[ 주문 목록 ]");
 		
-		List<Item> itemList = order.getItemList();
-		for(Item item : itemList) {
-			System.out.println("---> " + item.getProduct().getName());
-		}
+		// List<Item> itemList = order.getItemList();
+		// for(Item item : itemList) {
+		// 	System.out.println("---> " + item.getProduct().getName());
+		// }
 		
 //		List<Product> productList = order.getProductList();
 //		for(Product product : productList) {

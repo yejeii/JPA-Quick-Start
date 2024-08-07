@@ -22,9 +22,9 @@ public class ManyToOneBothWayWithCascadeClient {
 		
 		try {
 			 dataInsertWithPersistenceCascade(emf);
-             dataDeleteWithPersistenceCascade(emf);
-            //dataDeleteWithOrphanRemoval(emf);
-            // dataDeleteWithNull(emf);
+             // dataDeleteWithPersistenceCascade(emf);
+            // dataDeleteWithOrphanRemoval(emf);
+            dataDeleteWithNull(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -122,14 +122,10 @@ public class ManyToOneBothWayWithCascadeClient {
 		// 삭제할 부서 검색
 		DepartmentWithCascade department = em.find(DepartmentWithCascade.class, 1L);
 		List<EmployeeWithCascade> employeeList = department.getEmployeeList();
-        System.out.println("!!");
-        System.out.println(department.getName()+ ",  "+department.getEmployeeList());
-        if(department.getEmployeeList() == employeeList) {
-            System.out.println("true");
-        }
-		
-		// 부서에 속한 모든 사원을 조회
+        System.out.println("-----");
+        // System.out.println(department.getName()+ ",  "+department.getEmployeeList());
 
+		// 부서에 속한 모든 직원을 컬렉션에서 제거
         // 영속성 컨테이너에서 부서와 사원의 연관관계 제거
         // 제거한 위치 : 영속 컨테이너
         // 차이점 발생 : 테이블에서 발생함!
@@ -158,7 +154,7 @@ public class ManyToOneBothWayWithCascadeClient {
 		em.getTransaction().begin();
 		
 		// 삭제할 부서 검색
-		DepartmentWithCascade department = em.find(DepartmentWithCascade.class, 6L);
+		DepartmentWithCascade department = em.find(DepartmentWithCascade.class, 1L);
 		
 		// 사원의 부서 정보 수정
 		List<EmployeeWithCascade> employeeList = department.getEmployeeList();
@@ -173,7 +169,7 @@ public class ManyToOneBothWayWithCascadeClient {
         }
         
         // 부서 삭제 (원할 경우)
-        // em.remove(department);
+        em.remove(department);
 
 		em.getTransaction().commit();
 		em.close();

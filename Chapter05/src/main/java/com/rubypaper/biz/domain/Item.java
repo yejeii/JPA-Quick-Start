@@ -34,9 +34,9 @@ public class Item {
 	private Long quantity;		// 주문 수량
 	
 	// 주문(Order)과의 양방향 참조 설정
-	public void setOrder(Order order) {
-		this.order = order;
-		
-		order.getItemList().add(this);
-	}
+	// public void setOrder(Order order) {
+	// 	this.order = order;
+	//
+	// 	order.getItemList().add(this);
+	// }
 }

@@ -42,7 +42,11 @@
 		</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
+<<<<<<< Updated upstream
 			<param-value>UTF-8</param-value>
+=======
+			<param-value>EUC-KR</param-value>
+>>>>>>> Stashed changes
 		</init-param>
 	</filter>
 	

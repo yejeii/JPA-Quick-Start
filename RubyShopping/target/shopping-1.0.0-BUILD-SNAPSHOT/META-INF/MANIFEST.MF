@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
+<<<<<<< Updated upstream
 Built-By: ga29_
+=======
+Built-By: yesie
+>>>>>>> Stashed changes
 Build-Jdk: Oracle OpenJDK 13.0.2
 

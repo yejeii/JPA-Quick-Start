@@ -9,8 +9,8 @@ import javax.persistence.Persistence;
 
 import org.junit.Test;
 
-import com.rubypaper.biz.domain.Employee1_1;
-import com.rubypaper.biz.domain.EmployeeCard1_1;
+import com.rubypaper.biz.domain.Employee;
+import com.rubypaper.biz.domain.Card;
 
 /** 일대일 단방향 매핑 테스트 */
 public class OneToOneOneWayClient {
@@ -32,9 +32,12 @@ public class OneToOneOneWayClient {
 	private static void dataSelect(EntityManagerFactory emf) {
 		EntityManager em = emf.createEntityManager();
 		
-		EmployeeCard1_1 card = em.find(EmployeeCard1_1.class, 1L);
+		Card card = em.find(Card.class, 1L);
+		System.out.println("--");
 		System.out.println("검색된 사원증 번호 : " + card.getCardId());
+		System.out.println("--");
 		System.out.println("권한 : " + card.getRole());
+		System.out.println("--");
 		System.out.println("사원증 소유자 : " + card.getEmployee().getName());
 		
 	}
@@ -44,12 +47,12 @@ public class OneToOneOneWayClient {
 		em.getTransaction().begin();
 		
 		// 직원 등록
-		Employee1_1 employee = new Employee1_1();
+		Employee employee = new Employee();
 		employee.setName("둘리");
 		em.persist(employee);
 		
 		// 사원증 등록
-		EmployeeCard1_1 card = new EmployeeCard1_1();
+		Card card = new Card();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		card.setExpireDate(dateFormat.parse("2025-12-31"));
 		card.setRole("MASTER");
