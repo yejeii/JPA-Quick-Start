@@ -10,8 +10,8 @@ import lombok.Data;
 
 /**
  * 테이블 전략 + 식별자 테이블 생성 
- * @GeneratedValue(strategy=GenerationType.TABLE)
- * @TableGenerator
+ * {@GeneratedValue(strategy=GenerationType.TABLE)}
+ * {@TableGenerator}
  * 
  * 식별자 정보를 관리하기 위한 식별자 전용 테이블 생성
  */

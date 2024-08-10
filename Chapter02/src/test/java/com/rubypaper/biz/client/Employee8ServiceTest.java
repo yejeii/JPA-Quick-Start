@@ -47,7 +47,7 @@ public class Employee8ServiceTest {
      * 식별자에 @GeneratedValue 추가
      * -> 식별자 값을 hibernate 가 알아서 넣어준다.
      * -> hibernate 가 SYSTEM_SEQUENCE~~ 이름의 시퀀스 테이블이 생성하여 이를 참조하여 식별자를 할당함
-     * -> insert SQL 문은 null 로 설정되나, DB
+     * -> insert SQL 문은 null 로 설정되나, DB 엔 시퀀스 테이블에 올라간 정보를 토대로 pk 값이 설정됨
      * 
      * >> persist() 액션 << 
      * Hibernate: 
