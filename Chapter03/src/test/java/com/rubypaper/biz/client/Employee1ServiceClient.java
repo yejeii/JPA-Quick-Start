@@ -9,13 +9,15 @@ import org.junit.Test;
 
 import com.rubypaper.biz.domain.Employee1;
 
+import java.util.Optional;
+
 public class Employee1ServiceClient {
 
 	@Test
     public void run() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter03");
 		try {
-			// findAndUpdateEntity(emf);
+			deleteAndUpdate(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -351,6 +353,26 @@ public class Employee1ServiceClient {
 		// ***** 엔티티 삭제 실습 ****** //
 		tx.begin();
 		em.remove(findEmp);
+		tx.commit();
+
+		// 삭제 상태의 엔티티 확인 : 둘다 같은 주소 참조 -> remove 됨!
+		if(employee.equals(findEmp)) {
+			System.out.println("동일한 객체 참조!");
+		}
+		if(em.contains(employee)) {
+			System.out.println("employee 엔티티 관리중!");
+		}
+		if(em.contains(findEmp)) {
+			System.out.println("findEmp 엔티티 관리중!");
+		}
+
+		// 메모리상에서만 존재
+		System.out.println("findEmp 상태 : " + Optional.ofNullable(findEmp));
+
+		// 다시 관리 상태로 변경
+		tx.begin();
+		em.merge(findEmp);
+		// em.persist(findEmp); : Error 발생
 		tx.commit();
 	}
 
